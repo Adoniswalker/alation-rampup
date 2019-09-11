@@ -1,1 +1,0 @@
-web: mvn exec:java -Dexec.mainClass=com.dennis.app.App
