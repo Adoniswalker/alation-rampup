@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.dennis.learning</groupId>
+    <groupId>com.dennis.app</groupId>
     <artifactId>leaning-odbc</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
@@ -13,6 +13,11 @@
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+        <beanstalk.versionLabel>${maven.build.timestamp}</beanstalk.versionLabel>
+        <beanstalk.applicationName>my application</beanstalk.applicationName>
+        <beanstalker.region>us-east-2</beanstalker.region>
+        <beanstalk.cnamePrefix>my application</beanstalk.cnamePrefix>
     </properties>
     <dependencies>
         <dependency>
@@ -52,9 +57,21 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.example.bank.App</mainClass>
+                            <mainClass>com.dennis.app.App</mainClass>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>br.com.ingenieux</groupId>
+                <artifactId>beanstalk-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <configuration>
+                    <s3Bucket>my-application-bucket-live</s3Bucket>
+                    <s3Key>${project.artifactId}/${project.build.finalName}-${maven.build.timestamp}.jar</s3Key>
+                    <applicationName>my application</applicationName>
+                    <environmentName>my-application-live</environmentName>
+                    <environmentRef>my-application-live</environmentRef>
                 </configuration>
             </plugin>
         </plugins>
