@@ -1,8 +1,8 @@
 language: java
-#sudo: required
+sudo: false
 jdk: oraclejdk12
 install: true
-script: ./mvnw clean install
+script: mvn clean verify
 cache:
   directories:
     - $HOME/.m2
