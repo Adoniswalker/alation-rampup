@@ -1,0 +1,21 @@
+language: java
+#sudo: required
+jdk: oraclejdk12
+install: true
+script: ./mvnw clean install
+cache:
+  directories:
+    - $HOME/.m2
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "pre alation"
+  env: "PreAlation-env"
+  bucket_name: "elasticbeanstalk-us-east-2-202443327350"
+  bucket_path: "pre-alation"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
