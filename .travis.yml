@@ -2,7 +2,7 @@ language: java
 sudo: false
 jdk: oraclejdk12
 install: true
-script: mvn clean verify
+script: mvn clean install
 cache:
   directories:
     - $HOME/.m2
@@ -14,6 +14,7 @@ deploy:
   env: "PreAlation-env"
   bucket_name: "elasticbeanstalk-us-east-2-202443327350"
   bucket_path: "pre-alation"
+  artifact: target/leaning-odbc-1.0-SNAPSHOT.jar
   on:
     branch: master
   access_key_id: "$AWS_ACCESS_KEY"
