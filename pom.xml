@@ -10,7 +10,7 @@
     <properties>
         <!-- https://maven.apache.org/general.html#encoding-warning -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+        <exec.mainClass>com.dennis.app.App</exec.mainClass>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
@@ -46,32 +46,22 @@
             <artifactId>junit</artifactId>
             <version>4.13-beta-1</version>
         </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <archive>
                         <manifest>
                             <mainClass>com.dennis.app.App</mainClass>
                         </manifest>
                     </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>br.com.ingenieux</groupId>
-                <artifactId>beanstalk-maven-plugin</artifactId>
-                <version>1.5.0</version>
-                <configuration>
-                    <s3Bucket>my-application-bucket-live</s3Bucket>
-                    <s3Key>${project.artifactId}/${project.build.finalName}-${maven.build.timestamp}.jar</s3Key>
-                    <applicationName>my application</applicationName>
-                    <environmentName>my-application-live</environmentName>
-                    <environmentRef>my-application-live</environmentRef>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
             </plugin>
         </plugins>
