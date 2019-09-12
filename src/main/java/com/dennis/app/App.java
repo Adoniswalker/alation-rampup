@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class App {
     public static void main(String[] args) {
         try {
-            HttpServer server = HttpServer.create(new InetSocketAddress(8500), 0);
+            HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", 8500), 0);
             HttpContext context = server.createContext("/employees");
             context.setHandler(EmployeeHandler::handleEmployees);
             HttpContext rpc = server.createContext("/rpc-server");
