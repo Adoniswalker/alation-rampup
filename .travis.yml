@@ -1,13 +1,17 @@
 language: java
 sudo: false
-#jdk: oraclejdk12
-#install: true
-#script: mvn clean compile assembly:single
+services: docker
+
+#before_install:
+
 cache:
   directories:
     - $HOME/.m2
 
 deploy:
+  script:
+    - docker-compose build
+    - docker-compose up -d
   provider: elasticbeanstalk
   region: "us-east-2"
   app: "pre alation"
