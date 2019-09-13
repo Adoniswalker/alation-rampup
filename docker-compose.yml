@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  api:
+    container_name: api-container
+    build: .
+    ports:
+      - "5000:8500"
+    env_file:
+      - .env
+
+  database:
+    container_name: database_container
+    image: postgres
+    env_file:
+      - .env
+    ports:
+      - "54320:5432"
+    volumes:
+      - my_dbdata:/var/lib/postgresql/data
+volumes:
+  my_dbdata:

@@ -1,8 +1,8 @@
 language: java
 sudo: false
-jdk: oraclejdk12
-install: true
-script: mvn clean compile assembly:single
+#jdk: oraclejdk12
+#install: true
+#script: mvn clean compile assembly:single
 cache:
   directories:
     - $HOME/.m2
@@ -11,9 +11,9 @@ deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
   app: "pre alation"
-  env: "PreAlation-env"
+  env: "PreAlation-env-docker"
   bucket_name: "elasticbeanstalk-us-east-2-202443327350"
-  bucket_path: "pre-alation"
+  bucket_path: "pre-alation-docker"
   artifact: true
   on:
     branch: master

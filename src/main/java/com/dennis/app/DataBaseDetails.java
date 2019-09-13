@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Map;
 
 public class DataBaseDetails {
-    //    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String JDBC_URL = System.getenv("DATABASE_URL");
 
     static final String USER = System.getenv("USERNAME");
@@ -24,6 +23,16 @@ public class DataBaseDetails {
             conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
             //execute query
             stmt = conn.createStatement();
+            stmt.executeQuery("CREATE TABLE employees (\n" +
+                    "    id integer DEFAULT nextval('\"Employees_id_seq\"'::regclass) PRIMARY KEY,\n" +
+                    "    first text,\n" +
+                    "    last text,\n" +
+                    "    age text\n" +
+                    ");\n" +
+                    "\n" +
+                    "-- Indices -------------------------------------------------------\n" +
+                    "\n" +
+                    "CREATE UNIQUE INDEX \"Employees_pkey\" ON employees(id int4_ops);");
         } catch (SQLException se) {
             se.printStackTrace();
         } catch (Exception e) {
@@ -43,7 +52,6 @@ public class DataBaseDetails {
             se.printStackTrace();
         }
     }
-
     Collection<Map<String, String>> queryData(String sql) {
         try {
             ResultSet rs = stmt.executeQuery(sql);
