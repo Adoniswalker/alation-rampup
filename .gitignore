@@ -40,3 +40,7 @@ buildNumber.properties
 hs_err_pid*
 
 .env
+.classpath
+.project
+.settings/
+.vagrant
